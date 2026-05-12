@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mukul Singh | Researcher at Microsoft Research</title>
+    <title>Mukul Singh | Director of Science at Microsoft Research</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
@@ -58,6 +58,8 @@
         .nav-menu { display: flex; list-style: none; gap: 2rem; }
         .nav-menu a { color: var(--text-secondary); font-size: 0.95rem; padding: 0.5rem 0; }
         .nav-menu a:hover { color: var(--text-primary); text-decoration: none; }
+        .nav-menu a.nav-highlight { color: var(--accent); font-weight: 600; background: #eef2ff; border: 1px solid #c7d2fe; padding: 0.3rem 0.65rem; border-radius: 4px; font-size: 0.85rem; }
+        .nav-menu a.nav-highlight:hover { background: #dbeafe; border-color: var(--accent); }
         .nav-toggle { display: none; background: none; border: none; font-size: 1.25rem; color: var(--text-primary); cursor: pointer; }
         
         .about-section { padding: 4rem 0 3rem; }
@@ -74,6 +76,8 @@
         .research-interests h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--text-primary); }
         .research-interests ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .research-interests li { background: var(--bg-secondary); padding: 0.35rem 0.75rem; border-radius: 3px; font-size: 0.875rem; color: var(--text-secondary); }
+
+
         
         .news-list { list-style: none; }
         .news-list li { display: grid; grid-template-columns: 80px 1fr; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
@@ -127,6 +131,22 @@
         .talk-meta { font-size: 0.875rem; color: var(--text-muted); }
         .talk-venue { color: var(--text-secondary); }
         
+        .articles-list { display: flex; flex-direction: column; gap: 1.5rem; }
+        .article-card { display: flex; gap: 1.5rem; padding: 1.5rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; text-decoration: none; transition: box-shadow 0.2s, border-color 0.2s; }
+        .article-card:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-decoration: none; }
+        .article-icon { font-size: 2.5rem; color: var(--accent); flex-shrink: 0; display: flex; align-items: flex-start; padding-top: 0.25rem; }
+        .article-content h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.375rem; color: var(--text-primary); }
+        .article-card:hover .article-content h3 { color: var(--accent); }
+        .article-content .article-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .article-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .article-tags span { background: var(--bg-secondary); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+        .article-card { cursor: pointer; }
+
+        /* Article reader overlay */
+        @media (max-width: 768px) {
+            .article-card { flex-direction: column; gap: 0.75rem; }
+        }
+        
         .footer { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
         .footer p { text-align: center; font-size: 0.875rem; color: var(--text-muted); }
         
@@ -158,6 +178,7 @@
         <div class="nav-container">
             <a href="#" class="nav-logo">Mukul Singh</a>
             <ul class="nav-menu">
+                <li><a href="#articles" class="nav-highlight"><i class="fas fa-pen-nib" style="font-size:0.8rem;margin-right:0.25rem"></i>Articles</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#news">News</a></li>
                 <li><a href="#talks">Talks</a></li>
@@ -182,7 +203,7 @@
                     </div>
                     <div class="profile-info">
                         <h1>Mukul Singh</h1>
-                        <p class="title">Researcher at Microsoft Research</p>
+                        <p class="title">Director of Science at Microsoft Research</p>
                         <p class="affiliation">PROSE Group, Redmond, USA</p>
                         
                         <div class="contact-links">
@@ -194,7 +215,7 @@
 
                         <div class="bio">
                             <p>
-                                I am a Researcher at <strong>Microsoft Research</strong> in the PROSE (Program Synthesis using Examples) group. 
+                                I am a Director of Science at <strong>Microsoft Research</strong> in the PROSE (Program Synthesis using Examples) group. 
                                 My research focuses on <strong>Agentic AI</strong>, <strong>Large Language Models</strong>, <strong>AI for Code</strong>, 
                                 and <strong>Program Synthesis</strong>.
                             </p>
@@ -219,6 +240,8 @@
                                 <li>Table Understanding & Formatting</li>
                             </ul>
                         </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -228,6 +251,30 @@
             <div class="container">
                 <h2>News</h2>
                 <ul class="news-list">
+                    <li>
+                        <span class="date">May 2026</span>
+                        <span class="content">Paper accepted at <strong>ACL 2026</strong>: "Agentic Context Strategies for Multi-Format Document Understanding"</span>
+                    </li>
+                    <li>
+                        <span class="date">May 2026</span>
+                        <span class="content">Paper accepted at <strong>HCAIR 2026</strong>: "Training Emergent Joint Associations: A RL Approach to Creative Thinking in LMs"</span>
+                    </li>
+                    <li>
+                        <span class="date">Apr 2026</span>
+                        <span class="content">Paper accepted at <strong>FSE 2026 Industry</strong>: "AutoChecklist: Automated Checklist Refinement for LLM Judges"</span>
+                    </li>
+                    <li>
+                        <span class="date">Apr 2026</span>
+                        <span class="content">Promoted to <strong>Director of Science</strong> at Microsoft Research</span>
+                    </li>
+                    <li>
+                        <span class="date">May 2026</span>
+                        <span class="content"><strong>New article:</strong> <a href="articles/linkedin-article.html" target="_blank">MCP Is Not Enough: Why Code DSLs Will Replace JSON Tool Calling</a> — 60 experiments show 76% token savings vs. JSON tool calling</span>
+                    </li>
+                    <li>
+                        <span class="date">May 2026</span>
+                        <span class="content">Serving as <strong>Area Chair</strong> for FSE 2026 and <strong>Senior Area Chair</strong> for EMNLP 2026</span>
+                    </li>
                     <li>
                         <span class="date">Dec 2025</span>
                         <span class="content"><strong>Invited speaker</strong> at Dagstuhl Seminar on Diffusion Models for Code Generation</span>
@@ -305,12 +352,53 @@
             </div>
         </section>
 
+        <section id="articles" class="section">
+            <div class="container">
+                <h2>Articles</h2>
+                <div class="articles-list">
+                    <a href="articles/linkedin-article.html" target="_blank" class="article-card">
+                        <div class="article-icon"><i class="fas fa-pen-nib"></i></div>
+                        <div class="article-content">
+                            <h3>MCP Is Not Enough: Why Code DSLs Will Replace JSON Tool Calling</h3>
+                            <p class="article-desc">We ran 60 experiments and found Code DSLs use 76% fewer tokens, 48% fewer turns, and 45% lower latency at identical quality compared to JSON tool calling.</p>
+                            <div class="article-tags">
+                                <span>AI Agents</span>
+                                <span>MCP</span>
+                                <span>Code Generation</span>
+                                <span>LLM</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section id="publications" class="section">
             <div class="container">
                 <h2>Publications</h2>
                 <p class="section-desc">Full list on <a href="https://scholar.google.com/citations?user=3O7KjiIAAAAJ&hl=en" target="_blank">Google Scholar</a></p>
                 
                 <div class="publications-list">
+                    <div class="pub-year">2026</div>
+
+                    <article class="publication">
+                        <h3><a href="https://openreview.net/forum?id=8Z01lIJdvc" target="_blank">Agentic Context Strategies for Multi-Format Document Understanding: When Should Language Models Use Tools?</a></h3>
+                        <p class="authors"><strong>Mukul Singh</strong>, Arjun Radhakrishna, Mansi Uniyal, Sumit Gulwani</p>
+                        <div class="venue-line"><span class="venue">ACL 2026</span></div>
+                    </article>
+
+                    <article class="publication">
+                        <h3><a href="https://conf.researchr.org/details/fse-2026/fse-2026-industry-papers/61/AutoChecklist-Automated-Checklist-Refinement-for-LLM-Judges" target="_blank">AutoChecklist: Automated Checklist Refinement for LLM Judges</a></h3>
+                        <p class="authors">Mansi Uniyal, <strong>Mukul Singh</strong>, Gust Verbruggen, Vu Le, Sumit Gulwani</p>
+                        <div class="venue-line"><span class="venue">FSE 2026 Industry</span></div>
+                    </article>
+
+                    <article class="publication">
+                        <h3><a href="https://usneek1.github.io/assets/asking.pdf" target="_blank">Asking Language Models How to Represent Data for Fine-Tuning</a></h3>
+                        <p class="authors">Usneek Singh, Ananya Singha, Abhijeet Awasthi, Sumit Gulwani, Aditya Kanade, Vu Le, <strong>Mukul Singh</strong>, Gust Verbruggen</p>
+                        <div class="venue-line"><span class="venue">ACL 2026 Workshop SURGeLLM</span></div>
+                    </article>
+
                     <div class="pub-year">2025</div>
 
                     <article class="publication">
@@ -320,14 +408,20 @@
                     </article>
 
                     <article class="publication">
-                        <h3><a href="https://arxiv.org/abs/2511.17876" target="_blank">Training Emergent Joint Associations: A Reinforcement Learning Approach to Creative Thinking in Language Models</a></h3>
+                        <h3><a href="https://openreview.net/forum?id=u2qXdwRXNA" target="_blank">Training Emergent Joint Associations: A Reinforcement Learning Approach to Creative Thinking in Language Models</a></h3>
                         <p class="authors"><strong>Mukul Singh</strong>, Ananya Singha, Aishni Parab, Pronita Mehrotra, Sumit Gulwani</p>
-                        <div class="venue-line"><span class="venue">arXiv 2025</span></div>
+                        <div class="venue-line"><span class="venue">HCAIR 2026</span></div>
                     </article>
 
                     <article class="publication">
                         <h3><a href="https://arxiv.org/abs/2510.05457" target="_blank">Do Code Models Suffer from the Dunning-Kruger Effect?</a></h3>
                         <p class="authors"><strong>Mukul Singh</strong>, Saikat Chatterjee, Arjun Radhakrishna, Sumit Gulwani</p>
+                        <div class="venue-line"><span class="venue">arXiv 2025</span></div>
+                    </article>
+
+                    <article class="publication">
+                        <h3><a href="https://arxiv.org/abs/2503.10698" target="_blank">Ordered Semantically Diverse Sampling for Textual Data</a></h3>
+                        <p class="authors">Ashish Tiwari, <strong>Mukul Singh</strong>, Ananya Singha, Arjun Radhakrishna</p>
                         <div class="venue-line"><span class="venue">arXiv 2025</span></div>
                     </article>
 
@@ -400,6 +494,12 @@
                     </article>
 
                     <div class="pub-year">2023</div>
+
+                    <article class="publication">
+                        <h3><a href="https://arxiv.org/abs/2312.11524" target="_blank">Assessing GPT4-V on Structured Reasoning Tasks</a></h3>
+                        <p class="authors"><strong>Mukul Singh</strong>, José Cambronero, Sumit Gulwani, Vu Le, Gust Verbruggen</p>
+                        <div class="venue-line"><span class="venue">arXiv 2023</span></div>
+                    </article>
 
                     <article class="publication">
                         <h3><a href="https://scholar.google.com/citations?user=3O7KjiIAAAAJ&hl=en" target="_blank">CODEFUSION: A Pre-trained Diffusion Model for Code Generation</a></h3>
@@ -523,6 +623,14 @@
                 <h2>Patents</h2>
                 <ul class="patents-list">
                     <li>
+                        <span class="patent-title">AI Engine Retrieving Over Typed Documentation Graphs to Generate Code</span>
+                        <span class="patent-authors"><strong>Mukul Singh</strong></span>
+                    </li>
+                    <li>
+                        <span class="patent-title">Systems and Methods for Executable Directory-Structured Memory in Large Language Models</span>
+                        <span class="patent-authors"><strong>Mukul Singh</strong></span>
+                    </li>
+                    <li>
                         <span class="patent-title">Execution Guided Within-Prompt Search With Large Language Models</span>
                         <span class="patent-authors"><strong>Mukul Singh</strong>, Ashish Tiwari, Vu Le, Sumit Gulwani, Gust Verbruggen</span>
                     </li>
@@ -585,8 +693,17 @@
                 <div class="experience-list">
                     <div class="experience-item">
                         <div class="exp-header">
+                            <h3>Director of Science</h3>
+                            <span class="exp-date">Apr 2026 – Present</span>
+                        </div>
+                        <p class="exp-org">Microsoft Research, PROSE Group · Redmond, USA</p>
+                        <p class="exp-desc">Leading research on Agentic AI, code generation, and program synthesis. Work powers GitHub Copilot, Excel Copilot, and Visual Studio.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="exp-header">
                             <h3>Researcher</h3>
-                            <span class="exp-date">Jul 2022 – Present</span>
+                            <span class="exp-date">Jul 2022 – Mar 2026</span>
                         </div>
                         <p class="exp-org">Microsoft Research, PROSE Group · Redmond, USA</p>
                         <p class="exp-desc">Research on code generation, diffusion models, table understanding, and UI automation. Work powers GitHub Copilot, Excel Copilot, and Visual Studio.</p>
@@ -659,15 +776,15 @@
                 <div class="service-grid">
                     <div class="service-item">
                         <h3>Senior Area Chair</h3>
-                        <p>EMNLP 2025, ACL 2025, NAACL 2025</p>
+                        <p>EMNLP 2026, ACL ARR 2026, ACL 2026, EMNLP 2025, ACL 2025, NAACL 2025</p>
                     </div>
                     <div class="service-item">
                         <h3>Area Chair</h3>
-                        <p>EMNLP 2024, ICSE 2024, CIKM 2024, ACL 2024</p>
+                        <p>FSE 2026, EMNLP 2024, ICSE 2024, CIKM 2024, ACL 2024</p>
                     </div>
                     <div class="service-item">
-                        <h3>Program Committee</h3>
-                        <p>ACL, EMNLP, AAAI, NeurIPS</p>
+                        <h3>Program Committee / Reviewer</h3>
+                        <p>NeurIPS 2026, ICLR 2026, COLM 2026, IJCAI-ECAI 2026, ACL 2026, ACM CAIS 2026, ACL, EMNLP, AAAI, NeurIPS</p>
                     </div>
                     <div class="service-item">
                         <h3>Journal Reviewer</h3>
