@@ -351,50 +351,93 @@
     margin: 0 auto;
   }
 
-  /* ── Floating toolbar ─────────────────────── */
-  .article-toolbar {
-    position: fixed;
-    top: 20px;
-    right: 24px;
-    z-index: 100;
+  /* ── Chart gallery ─────────────────────────── */
+  .chart-banner {
+    margin: 36px 0 20px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .chart-banner-header {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #0f172a, #1e3a5f);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
     display: flex;
-    gap: 6px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    padding: 6px 8px;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  }
-  .toolbar-btn {
-    display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 5px;
-    font-family: 'Inter', sans-serif;
+    gap: 8px;
+  }
+  .chart-banner-header span {
+    opacity: 0.5;
+    font-weight: 400;
     font-size: 12px;
-    font-weight: 500;
+  }
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .chart-grid .chart-cell {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
     cursor: pointer;
-    transition: background 0.15s;
-    text-decoration: none;
-    color: #cbd5e1;
-    background: transparent;
+    transition: transform 0.15s;
   }
-  .toolbar-btn:hover {
-    background: rgba(255,255,255,0.1);
-    color: #f1f5f9;
+  .chart-grid .chart-cell:nth-child(2n) { border-right: none; }
+  .chart-grid .chart-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .chart-grid .chart-cell:hover { z-index: 2; transform: scale(1.02); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .chart-cell img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
-  .toolbar-btn i { font-size: 13px; }
-  .toolbar-btn.copied { color: #4ade80; }
-
-  @media (max-width: 480px) {
-    .article-toolbar { top: 10px; right: 10px; padding: 4px 6px; }
-    .toolbar-btn span { display: none; }
-    .toolbar-btn { padding: 6px 8px; }
+  .chart-cell .chart-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 20px 12px 8px;
+    letter-spacing: 0.2px;
+  }
+  /* Hero chart -- single wide image */
+  .chart-hero {
+    margin: 36px 0 10px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .chart-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .chart-hero .chart-caption {
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--muted);
+    background: #f8fafc;
+    text-align: center;
   }
 
   /* ── Responsive ───────────────────────────── */
+  @media (max-width: 640px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .chart-grid .chart-cell:nth-child(2n) { border-right: none; }
+    .chart-grid .chart-cell { border-bottom: 1px solid var(--border); }
+    .chart-grid .chart-cell:last-child { border-bottom: none; }
+  }
   @media (max-width: 480px) {
     .hero { padding: 48px 16px 40px; }
     .stats { grid-template-columns: 1fr 1fr; }
@@ -403,19 +446,6 @@
 </style>
 </head>
 <body>
-
-<!-- ═══ Floating Toolbar ══════════════════════════════ -->
-<div class="article-toolbar">
-  <a href="../index.html#articles" class="toolbar-btn" title="Back to site">
-    <i class="fas fa-arrow-left"></i><span>Back</span>
-  </a>
-  <button class="toolbar-btn" onclick="window.print()" title="Print article">
-    <i class="fas fa-print"></i><span>Print</span>
-  </button>
-  <button class="toolbar-btn" id="copyLinkBtn" onclick="copyLink()" title="Copy link">
-    <i class="fas fa-link"></i><span>Copy Link</span>
-  </button>
-</div>
 
 <!-- ═══ Hero ═══════════════════════════════════════════ -->
 <header class="hero">
@@ -437,7 +467,7 @@
 
 <p>And for simple, single-step tool calls, it works brilliantly.</p>
 
-<p>But for the kind of multi-step workflows that actually matter in production — automating email pipelines, orchestrating calendar scheduling, coordinating across CRM + docs + chat — MCP and JSON tool calling hit a wall. I've built agents across multiple productivity domains, and I'm now convinced that <strong>code DSLs will replace JSON tool calling</strong> as the default interface for production AI agents.</p>
+<p>But for the kind of multi-step workflows that actually matter in production — automating order-to-shipment pipelines, orchestrating multi-system inventory sync, coordinating across CRM + billing + support — MCP and JSON tool calling hit a wall. I've built agents across multiple business domains, and I'm now convinced that <strong>code DSLs will replace JSON tool calling</strong> as the default interface for production AI agents.</p>
 
 <!-- ─── Data ──────────────────────────────────── -->
 <h2>The State of Tool Calling: Worse Than You Think</h2>
@@ -477,17 +507,17 @@
 
 <h3>1. One Tool Per Turn = Death by Round Trips</h3>
 
-<p>"Find emails about Project X, get the senders, check their availability, and book a meeting" is one user intent. In MCP, it's 4+ separate tool calls, each requiring a full model inference pass. Each round trip is an opportunity for the model to lose context, forget intermediate state, hallucinate parameters, or get confused about which results belong to which step.</p>
+<p>"Find open support tickets about billing errors, look up the affected customers, check their subscription tier, and issue a batch credit" is one user intent. In MCP, it's 4+ separate tool calls, each requiring a full model inference pass. Each round trip is an opportunity for the model to lose context, forget intermediate state, hallucinate parameters, or get confused about which results belong to which step.</p>
 
 <p>The BFCL data confirms this: multi-turn accuracy drops <strong>30–60 percentage points</strong> compared to single-turn for most models.</p>
 
 <h3>2. Flat Tool Lists Don't Scale</h3>
 
-<p>MCP servers expose tools as a flat list of JSON schemas. A productivity server might expose <code>searchMessages</code>, <code>createFolder</code>, <code>moveMessage</code>, <code>listRules</code>, <code>createEvent</code>, <code>getFreeBusy</code> — 40+ individual tools. The model must scan the entire list, remember parameter schemas across tools, and understand implicit relationships (<em>"the <code>folderId</code> in <code>moveMessage</code> comes from the <code>id</code> field in the <code>createFolder</code> response"</em>).</p>
+<p>MCP servers expose tools as a flat list of JSON schemas. A commerce server might expose <code>searchOrders</code>, <code>createShipment</code>, <code>updateInventory</code>, <code>listReturns</code>, <code>issueRefund</code>, <code>getCustomer</code> — 40+ individual tools. The model must scan the entire list, remember parameter schemas across tools, and understand implicit relationships (<em>"the <code>customerId</code> in <code>issueRefund</code> comes from the <code>customer</code> field in the <code>searchOrders</code> response"</em>).</p>
 
 <h3>3. JSON Payloads Invite Hallucination</h3>
 
-<p>When a tool expects deeply nested JSON like <code>{ "start": { "dateTime": "…", "timeZone": "…" }, "attendees": [{ "emailAddress": { "name": "…", "address": "…" } }] }</code>, the model reconstructs this from memory every time. No type checker. No autocomplete. No compiler errors. Just vibes.</p>
+<p>When a tool expects deeply nested JSON like <code>{ "line_items": [{ "product": { "sku": "…", "variant_id": "…" }, "quantity": 1, "pricing": { "unit_price": "…", "currency": "…" } }] }</code>, the model reconstructs this from memory every time. No type checker. No autocomplete. No compiler errors. Just vibes.</p>
 
 <p>In production agents I've built, <strong>payload hallucination accounts for ~38% of all failures</strong> — inventing fields that don't exist, using wrong nesting, or passing strings where objects are expected.</p>
 
@@ -500,26 +530,26 @@
   <div class="compare-card bad">
     <div class="tag">✗ MCP / JSON Tool Calling</div>
     <pre><span class="cm">// 6 inference passes, 6 chances to fail</span>
-Turn 1: searchMessages(<span class="str">"project raptor"</span>)
+Turn 1: searchTickets(<span class="str">"billing error"</span>)
 Turn 2: <span class="cm">[model processes results]</span>
-Turn 3: getFreeBusy({<span class="str">"schedules"</span>: [...]})
-Turn 4: <span class="cm">[model picks a slot]</span>
-Turn 5: createEvent({<span class="str">"subject"</span>: ...})
-Turn 6: forwardMessage({<span class="str">"id"</span>: ...})</pre>
+Turn 3: getCustomer({<span class="str">"ids"</span>: [...]})
+Turn 4: <span class="cm">[model checks subscriptions]</span>
+Turn 5: issueCredit({<span class="str">"amount"</span>: ...})
+Turn 6: resolveTicket({<span class="str">"id"</span>: ...})</pre>
   </div>
   <div class="compare-card good">
     <div class="tag">✓ Code DSL — Single Pass</div>
-    <pre><span class="kw">const</span> msgs = <span class="kw">await</span> <span class="fn">Mail.messages.search</span>(<span class="str">"project raptor"</span>);
-<span class="kw">const</span> senders = msgs.<span class="fn">senders</span>();
-<span class="kw">const</span> slots = <span class="kw">await</span> <span class="fn">Calendar.freebusy</span>(senders, {
-  duration: <span class="num">60</span>, range: <span class="str">"this_week"</span>
+    <pre><span class="kw">const</span> tickets = <span class="kw">await</span> <span class="fn">Support.tickets.search</span>(<span class="str">"billing error"</span>);
+<span class="kw">const</span> customers = tickets.<span class="fn">customers</span>();
+<span class="kw">const</span> subs = <span class="kw">await</span> <span class="fn">Billing.subscriptions.get</span>(customers, {
+  status: <span class="str">"active"</span>, include: <span class="str">"tier"</span>
 });
-<span class="kw">const</span> event = <span class="kw">await</span> <span class="fn">Calendar.events.create</span>({
-  subject: <span class="str">"Raptor Sync"</span>,
-  start: slots[<span class="num">0</span>].start,
-  attendees: senders
+<span class="kw">const</span> credit = <span class="kw">await</span> <span class="fn">Billing.credits.create</span>({
+  customers: customers,
+  amount: subs.<span class="fn">map</span>(s <span class="op">=></span> s.monthlyRate),
+  reason: <span class="str">"Billing error resolution"</span>
 });
-<span class="kw">await</span> msgs.<span class="fn">first</span>().<span class="fn">forwardTo</span>(senders);</pre>
+<span class="kw">await</span> tickets.<span class="fn">resolve</span>({ note: credit.confirmationId });</pre>
   </div>
 </div>
 
@@ -548,41 +578,41 @@ Turn 6: forwardMessage({<span class="str">"id"</span>: ...})</pre>
 <div class="compare">
   <div class="compare-card bad">
     <div class="tag">✗ MCP: 40 flat tools</div>
-    <pre>searchMessages, createFolder,
-moveMessage, listRules,
-createEvent, getFreeBusy,
-listContacts, createTask,
-addAttachment, deleteRule…</pre>
+    <pre>searchOrders, createShipment,
+updateInventory, listReturns,
+issueRefund, getCustomer,
+listSubscriptions, createTicket,
+addLineItem, cancelOrder…</pre>
   </div>
   <div class="compare-card good">
     <div class="tag">✓ DSL: 6 namespaces</div>
-    <pre><span class="fn">Mail.messages</span>.<span class="fn">search</span>()
-<span class="fn">Mail.folders</span>.<span class="fn">create</span>()
-<span class="fn">Mail.rules</span>.<span class="fn">list</span>()
-<span class="fn">Calendar.events</span>.<span class="fn">create</span>()
-<span class="fn">Contacts</span>.<span class="fn">list</span>()
-<span class="fn">Tasks</span>.<span class="fn">create</span>()</pre>
+    <pre><span class="fn">Orders</span>.<span class="fn">search</span>()
+<span class="fn">Orders.shipments</span>.<span class="fn">create</span>()
+<span class="fn">Inventory</span>.<span class="fn">check</span>()
+<span class="fn">Billing.invoices</span>.<span class="fn">create</span>()
+<span class="fn">Customers</span>.<span class="fn">find</span>()
+<span class="fn">Support.tickets</span>.<span class="fn">create</span>()</pre>
   </div>
 </div>
 
 <h3>2. Typed Entities, Not Raw JSON</h3>
 <pre><span class="cm">// Direct, unambiguous access — no nested JSON surprises</span>
-message.from.address   <span class="cm">// string</span>
-message.from.name      <span class="cm">// string</span>
-message.isRead         <span class="cm">// boolean</span>
-message.receivedDate   <span class="cm">// Date</span></pre>
+order.customer.email     <span class="cm">// string</span>
+order.customer.name      <span class="cm">// string</span>
+order.status             <span class="cm">// "pending" | "shipped" | "delivered"</span>
+order.total.amount       <span class="cm">// number</span></pre>
 
 <h3>3. Chainable Collections</h3>
-<pre><span class="kw">const</span> targets = <span class="kw">await</span> <span class="fn">Mail.messages.list</span>({ top: <span class="num">50</span> })
-  .<span class="fn">where</span>(m <span class="op">=></span> m.from.address.<span class="fn">includes</span>(<span class="str">"@partner.com"</span>))
-  .<span class="fn">where</span>(m <span class="op">=></span> !m.isRead)
+<pre><span class="kw">const</span> targets = <span class="kw">await</span> <span class="fn">Orders.list</span>({ top: <span class="num">50</span> })
+  .<span class="fn">where</span>(o <span class="op">=></span> o.total.amount <span class="op">></span> <span class="num">500</span>)
+  .<span class="fn">where</span>(o <span class="op">=></span> o.status <span class="op">===</span> <span class="str">"pending"</span>)
   .<span class="fn">sortBy</span>(<span class="str">"date"</span>)
   .<span class="fn">take</span>(<span class="num">10</span>);
-<span class="kw">await</span> targets.<span class="fn">markAsRead</span>();
-<span class="kw">await</span> targets.<span class="fn">moveTo</span>(<span class="kw">await</span> <span class="fn">Mail.folders.create</span>(<span class="str">"Partner"</span>));</pre>
+<span class="kw">await</span> targets.<span class="fn">flagForReview</span>();
+<span class="kw">await</span> targets.<span class="fn">assignTo</span>(<span class="kw">await</span> <span class="fn">Teams.agents.onDuty</span>(<span class="str">"fulfillment"</span>));</pre>
 
 <h3>4. Provider-Agnostic Vocabulary</h3>
-<p>Generic names: <code>Mail.messages</code>, <code>Calendar.events</code>, <code>Files.upload</code>, <code>Chat.send</code>. Not <code>GmailMessage</code>, not <code>OutlookFolder</code>, not <code>SlackChannel</code>. Same DSL, any provider underneath.</p>
+<p>Generic names: <code>Orders.search</code>, <code>Billing.invoices</code>, <code>Inventory.check</code>, <code>Support.tickets</code>. Not <code>ShopifyOrder</code>, not <code>StripeInvoice</code>, not <code>ZendeskTicket</code>. Same DSL, any provider underneath.</p>
 
 <h3>5. Single-Pass Execution</h3>
 <p>The model generates one code block for the entire workflow. The DSL runtime executes each <code>await</code> against the real API. The model thinks in terms of the high-level pipeline. MCP handles the transport underneath.</p>
@@ -610,7 +640,7 @@ message.receivedDate   <span class="cm">// Date</span></pre>
   <div class="arch-arrow">↓</div>
   <div class="arch-layer l4">
     <div class="layer-title">📦 Application APIs</div>
-    <div class="layer-desc">Email, Calendar, CRM, Files, Chat...</div>
+    <div class="layer-desc">Orders, Billing, CRM, Inventory, Support...</div>
   </div>
 </div>
 
@@ -619,15 +649,15 @@ message.receivedDate   <span class="cm">// Date</span></pre>
 <!-- ─── Experiment ────────────────────────────── -->
 <h2>We Ran the Experiment: 25 APIs × 20 Scenarios × 3 Setups</h2>
 
-<p>Rather than rely on general benchmarks, I built a controlled experiment comparing <strong>three architectures</strong> on the exact same 20 productivity tasks (email, calendar, contacts, tasks, folders, rules) with 25 API functionalities:</p>
+<p>Rather than rely on general benchmarks, I built a controlled experiment comparing <strong>three architectures</strong> on the exact same 20 business workflow tasks (orders, inventory, customers, billing, support, notifications) with 25 API functionalities:</p>
 
 <ol>
   <li><strong>Flat Tools</strong> — 25 individual JSON tool schemas (standard OpenAI function calling)</li>
   <li><strong>MCP Grouped</strong> — Same 25 tools with domain-prefixed names across 6 virtual MCP servers</li>
-  <li><strong>Code DSL</strong> — Single <code>execute_code</code> tool with typed namespace reference (<code>Mail.*</code>, <code>Calendar.*</code>, etc.)</li>
+  <li><strong>Code DSL</strong> — Single <code>execute_code</code> tool with typed namespace reference (<code>Orders.*</code>, <code>Billing.*</code>, etc.)</li>
 </ol>
 
-<p>Scenarios range from single-step ("count unread emails") to complex orchestration ("incident response: find email, reply, find contacts, check availability, schedule meeting, create task, send update"). Each scenario has automated assertions checking correctness.</p>
+<p>Scenarios range from single-step ("count pending orders") to complex orchestration ("incident response: find affected orders, notify customers, check inventory, issue refunds, create support tickets, send status update"). Each scenario has automated assertions checking correctness.</p>
 
 <div class="stats">
   <div class="stat"><span class="number green">76%</span><span class="label">Fewer tokens<br>(DSL vs Tools)</span></div>
@@ -649,6 +679,11 @@ message.receivedDate   <span class="cm">// Date</span></pre>
     <tr><td>Quality Score</td><td>91.2%</td><td>91.2%</td><td><strong>91.2%</strong></td><td>—</td></tr>
   </tbody>
 </table>
+</div>
+
+<div class="chart-hero">
+  <img src="tokens_by_difficulty.png" alt="Token usage by setup and difficulty — Code DSL uses dramatically fewer tokens across all difficulty tiers">
+  <div class="chart-caption">Fig 1. Token usage scales linearly for tool-calling setups but stays flat for Code DSL — the gap widens from 49% (single-step) to 87% (complex).</div>
 </div>
 
 <div class="callout">
@@ -677,6 +712,28 @@ message.receivedDate   <span class="cm">// Date</span></pre>
 
 <p>The pattern is unmistakable: as task complexity grows, <strong>tool-calling cost grows linearly</strong> (each turn re-sends the full conversation history) while <strong>DSL cost stays nearly flat</strong> (one code block, regardless of how many operations it contains).</p>
 
+<div class="chart-banner">
+  <div class="chart-banner-header">📊 Experiment Results — All Charts <span>20 scenarios × 3 setups × 60 runs</span></div>
+  <div class="chart-grid">
+    <div class="chart-cell">
+      <img src="turns_by_difficulty.png" alt="LLM turns by difficulty">
+      <div class="chart-label">LLM Turns by Difficulty</div>
+    </div>
+    <div class="chart-cell">
+      <img src="latency_by_difficulty.png" alt="Latency by difficulty">
+      <div class="chart-label">Latency by Difficulty</div>
+    </div>
+    <div class="chart-cell">
+      <img src="overall_comparison.png" alt="Overall normalized comparison">
+      <div class="chart-label">Overall Comparison (Normalized)</div>
+    </div>
+    <div class="chart-cell">
+      <img src="quality_heatmap.png" alt="Quality score heatmap per scenario">
+      <div class="chart-label">Quality Heatmap (per Scenario)</div>
+    </div>
+  </div>
+</div>
+
 <!-- ─── External Benchmarks ─────────────────────── -->
 <h2>External Benchmark Context</h2>
 
@@ -702,7 +759,7 @@ message.receivedDate   <span class="cm">// Date</span></pre>
 <ol>
   <li><strong>Use MCP for connectivity.</strong> It's the right transport layer. Don't reinvent it.</li>
   <li><strong>Don't expose MCP tools directly to the model.</strong> Build a typed DSL layer on top.</li>
-  <li><strong>Design namespaces around user domains</strong>, not API endpoints. <code>Mail.messages</code>, not <code>graph_v1_me_messages_list</code>.</li>
+  <li><strong>Design namespaces around user domains</strong>, not API endpoints. <code>Orders.search</code>, not <code>api_v1_orders_list_get</code>.</li>
   <li><strong>Make entities typed and flat.</strong> <code>message.from.address</code> should just work.</li>
   <li><strong>Make collections chainable.</strong> <code>.where().sortBy().take().action()</code> eliminates loops and temp variables.</li>
   <li><strong>Keep the DSL provider-agnostic.</strong> Same interface, any backend.</li>
@@ -730,32 +787,6 @@ message.receivedDate   <span class="cm">// Date</span></pre>
   <h2>The JSON-tool-calling-and-pray era is ending.</h2>
   <p>I ran 60 experiments across 3 setups × 20 scenarios and Code DSLs delivered 76% token savings, 48% fewer turns, and 45% lower latency — at identical quality. The experiment framework is open. Drop a comment or DM and I'll share the code.</p>
 </div>
-
-<script>
-  // Font Awesome for toolbar icons
-  (function() {
-    if (!document.querySelector('link[href*="font-awesome"]')) {
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-      document.head.appendChild(link);
-    }
-  })();
-
-  function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(function() {
-      var btn = document.getElementById('copyLinkBtn');
-      btn.classList.add('copied');
-      btn.querySelector('span').textContent = 'Copied!';
-      btn.querySelector('i').className = 'fas fa-check';
-      setTimeout(function() {
-        btn.classList.remove('copied');
-        btn.querySelector('span').textContent = 'Copy Link';
-        btn.querySelector('i').className = 'fas fa-link';
-      }, 2000);
-    });
-  }
-</script>
 
 </body>
 </html>
