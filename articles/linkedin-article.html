@@ -351,93 +351,7 @@
     margin: 0 auto;
   }
 
-  /* ── Chart gallery ─────────────────────────── */
-  .chart-banner {
-    margin: 36px 0 20px;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
-    border: 1px solid var(--border);
-    background: var(--card);
-  }
-  .chart-banner-header {
-    padding: 14px 20px;
-    background: linear-gradient(135deg, #0f172a, #1e3a5f);
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .chart-banner-header span {
-    opacity: 0.5;
-    font-weight: 400;
-    font-size: 12px;
-  }
-  .chart-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-  .chart-grid .chart-cell {
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.15s;
-  }
-  .chart-grid .chart-cell:nth-child(2n) { border-right: none; }
-  .chart-grid .chart-cell:nth-last-child(-n+2) { border-bottom: none; }
-  .chart-grid .chart-cell:hover { z-index: 2; transform: scale(1.02); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-  .chart-cell img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .chart-cell .chart-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 20px 12px 8px;
-    letter-spacing: 0.2px;
-  }
-  /* Hero chart -- single wide image */
-  .chart-hero {
-    margin: 36px 0 10px;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
-    border: 1px solid var(--border);
-    background: var(--card);
-  }
-  .chart-hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .chart-hero .chart-caption {
-    padding: 10px 16px;
-    font-size: 12px;
-    color: var(--muted);
-    background: #f8fafc;
-    text-align: center;
-  }
-
   /* ── Responsive ───────────────────────────── */
-  @media (max-width: 640px) {
-    .chart-grid { grid-template-columns: 1fr; }
-    .chart-grid .chart-cell:nth-child(2n) { border-right: none; }
-    .chart-grid .chart-cell { border-bottom: 1px solid var(--border); }
-    .chart-grid .chart-cell:last-child { border-bottom: none; }
-  }
   @media (max-width: 480px) {
     .hero { padding: 48px 16px 40px; }
     .stats { grid-template-columns: 1fr 1fr; }
@@ -681,11 +595,6 @@ order.total.amount       <span class="cm">// number</span></pre>
 </table>
 </div>
 
-<div class="chart-hero">
-  <img src="tokens_by_difficulty.png" alt="Token usage by setup and difficulty — Code DSL uses dramatically fewer tokens across all difficulty tiers">
-  <div class="chart-caption">Fig 1. Token usage scales linearly for tool-calling setups but stays flat for Code DSL — the gap widens from 49% (single-step) to 87% (complex).</div>
-</div>
-
 <div class="callout">
   <p><strong>The critical insight:</strong> Token savings scale with complexity. Simple tasks save ~50%. Complex 7-step workflows? <strong>Flat tools use 22K tokens vs 2.4K for DSL — a 9× reduction.</strong> MCP grouping makes things <em>worse</em> (15% more tokens due to longer prefixes) without reducing turns.</p>
 </div>
@@ -711,28 +620,6 @@ order.total.amount       <span class="cm">// number</span></pre>
 </div>
 
 <p>The pattern is unmistakable: as task complexity grows, <strong>tool-calling cost grows linearly</strong> (each turn re-sends the full conversation history) while <strong>DSL cost stays nearly flat</strong> (one code block, regardless of how many operations it contains).</p>
-
-<div class="chart-banner">
-  <div class="chart-banner-header">📊 Experiment Results — All Charts <span>20 scenarios × 3 setups × 60 runs</span></div>
-  <div class="chart-grid">
-    <div class="chart-cell">
-      <img src="turns_by_difficulty.png" alt="LLM turns by difficulty">
-      <div class="chart-label">LLM Turns by Difficulty</div>
-    </div>
-    <div class="chart-cell">
-      <img src="latency_by_difficulty.png" alt="Latency by difficulty">
-      <div class="chart-label">Latency by Difficulty</div>
-    </div>
-    <div class="chart-cell">
-      <img src="overall_comparison.png" alt="Overall normalized comparison">
-      <div class="chart-label">Overall Comparison (Normalized)</div>
-    </div>
-    <div class="chart-cell">
-      <img src="quality_heatmap.png" alt="Quality score heatmap per scenario">
-      <div class="chart-label">Quality Heatmap (per Scenario)</div>
-    </div>
-  </div>
-</div>
 
 <!-- ─── External Benchmarks ─────────────────────── -->
 <h2>External Benchmark Context</h2>
