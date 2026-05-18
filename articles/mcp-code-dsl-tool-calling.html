@@ -443,6 +443,29 @@
     .stats { grid-template-columns: 1fr 1fr; }
     pre { font-size: 11px; padding: 14px 16px; }
   }
+
+  /* ── Back link ───────────────────────────── */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: #e2e8f0; }
+  .back-link svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 </style>
 </head>
 <body>
@@ -450,6 +473,10 @@
 <!-- ═══ Hero ═══════════════════════════════════════════ -->
 <header class="hero">
   <div class="hero-inner">
+    <a href="../index.html" class="back-link">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Homepage
+    </a>
     <div class="hero-badge">AI Agent Architecture</div>
     <h1>MCP Is Not Enough: Why <span>Code DSLs</span> Will Replace JSON Tool&nbsp;Calling</h1>
     <p class="subtitle">
