@@ -392,10 +392,94 @@
   }
 
   /* ── Responsive ───────────────────────────── */
+  @media (max-width: 640px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .chart-grid .chart-cell:nth-child(2n) { border-right: none; }
+    .chart-grid .chart-cell { border-bottom: 1px solid var(--border); }
+    .chart-grid .chart-cell:last-child { border-bottom: none; }
+  }
   @media (max-width: 480px) {
     .hero { padding: 48px 16px 40px; }
     .stats { grid-template-columns: 1fr 1fr; }
     pre { font-size: 11px; padding: 14px 16px; }
+  }
+
+  /* ── Chart gallery ─────────────────────────── */
+  .chart-banner {
+    margin: 36px 0 20px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .chart-banner-header {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #1a0533, #3b1f6e);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chart-banner-header span {
+    opacity: 0.5;
+    font-weight: 400;
+    font-size: 12px;
+  }
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .chart-grid .chart-cell {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .chart-grid .chart-cell:last-child { border-right: none; }
+  .chart-grid .chart-cell:hover { z-index: 2; transform: scale(1.02); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .chart-cell img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .chart-cell .chart-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 20px 12px 8px;
+    letter-spacing: 0.2px;
+  }
+  .chart-hero {
+    margin: 36px 0 10px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .chart-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .chart-hero .chart-caption {
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--muted);
+    background: #f8fafc;
+    text-align: center;
   }
 
   /* ── Top nav bar ─────────────────────────── */
@@ -570,6 +654,11 @@
 
 <p>Every task follows the same loop: read from memory, solve the task, write back to memory.</p>
 
+<div class="chart-hero">
+  <img src="images/memory/architecture.jpg" alt="MMM system architecture — showing the memory loop between task, LLM, and directory-structured memory">
+  <div class="chart-caption">Fig 1. MMM architecture: the LLM queries directory-structured memory, solves the task, and writes back new utilities.</div>
+</div>
+
 <div class="arch">
   <div class="arch-layer l1">
     <div class="layer-title">📋 New Task</div>
@@ -598,6 +687,24 @@
 </div>
 
 <p>The key insight: memory doesn't just grow. We tracked memory evolution across hundreds of tasks and found something interesting. Size spikes early and then <strong>stabilizes</strong>, while nesting depth and modification count keep increasing. The model learns to refine and reorganize rather than just pile things on.</p>
+
+<div class="chart-banner">
+  <div class="chart-banner-header">📊 Memory Evolution <span>tracked across % of solved tasks</span></div>
+  <div class="chart-grid">
+    <div class="chart-cell">
+      <img src="images/memory/memory-size.png" alt="Memory size vs tasks">
+      <div class="chart-label">Memory Size</div>
+    </div>
+    <div class="chart-cell">
+      <img src="images/memory/nesting-depth.png" alt="Nesting depth vs tasks">
+      <div class="chart-label">Nesting Depth</div>
+    </div>
+    <div class="chart-cell">
+      <img src="images/memory/modifications.png" alt="Modifications vs tasks">
+      <div class="chart-label">Modifications</div>
+    </div>
+  </div>
+</div>
 
 <!-- ─── Results ───────────────────────────────── -->
 <h2>The Numbers</h2>
@@ -628,6 +735,11 @@
 </div>
 
 <p>Consistent improvement across every benchmark. The gap is widest on OfficeJS (+10.6 over vector store) and most modest on SWEBench (+7.7), which makes sense: OfficeJS requires discovering and reusing domain-specific patterns, while SWEBench tasks have lower inter-task overlap.</p>
+
+<div class="chart-hero">
+  <img src="images/memory/benchmark-results.png" alt="Task success comparison across benchmarks — MMM consistently outperforms all baselines">
+  <div class="chart-caption">Fig 2. Task success comparison: MMM (purple) outperforms Vector Store, Flat Memory, and A-Mem across all benchmarks.</div>
+</div>
 
 <!-- ─── Low Resource ─────────────────────────── -->
 <h2>Where Memory Matters Most: Low-Resource Languages</h2>
